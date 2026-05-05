@@ -4,25 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;500&display=swap" rel="stylesheet">
 
 <title>Invitación Allyson</title>
 
 <style>
 body{
     margin:0;
-    font-family: 'Montserrat', sans-serif;
-    background: url('https://i.imgur.com/8IuucQZ.jpg');
-    background-size: cover;
+    background: linear-gradient(135deg, #5f6f73, #cfd8dc);
+    font-family: 'Cormorant Garamond', serif;
+    color:#2c3e50;
     text-align:center;
-    color:#c0392b;
+}
+
+/* efecto marmol suave */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url('https://www.transparenttextures.com/patterns/marble.png');
+    opacity:0.3;
+    z-index:-1;
 }
 
 /* animaciones */
 .fade{
     opacity:0;
     transform: translateY(40px);
-    transition:1s;
+    transition:1.2s ease;
 }
 .fade.show{
     opacity:1;
@@ -38,41 +48,51 @@ body{
 }
 
 h1{
-    font-family: 'Great Vibes', cursive;
-    font-size:70px;
+    font-family:'Great Vibes';
+    font-size:65px;
+    color:#1f2f3a;
 }
 
-/* secciones */
-.section{
-    padding:50px 20px;
+.subtitle{
+    font-size:20px;
 }
 
+/* tarjetas */
 .card{
-    border:2px solid gold;
-    padding:20px;
+    border:1px solid #b0bec5;
+    background: rgba(255,255,255,0.6);
     margin:20px;
+    padding:25px;
     border-radius:20px;
-    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
 }
 
 /* botones */
 .btn{
     display:inline-block;
     padding:12px 25px;
-    background:gold;
+    background: linear-gradient(135deg, #5f6f73, #90a4ae);
+    color:white;
     border-radius:30px;
     text-decoration:none;
-    color:black;
     margin-top:10px;
 }
 
 /* contador */
 #countdown{
-    font-size:30px;
-    margin-top:20px;
+    font-size:28px;
+    margin-top:10px;
 }
 
-/* dress code */
+/* mapa */
+.map{
+    width:80%;
+    border-radius:20px;
+    margin-top:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* dress */
 .dress{
     font-family:'Great Vibes';
     font-size:40px;
@@ -80,11 +100,12 @@ h1{
 
 /* botones RSVP */
 .rsvp button{
-    background:gold;
+    background: linear-gradient(135deg, #5f6f73, #90a4ae);
     border:none;
-    padding:15px 30px;
+    padding:15px 25px;
     margin:10px;
     border-radius:30px;
+    color:white;
     font-size:18px;
 }
 
@@ -93,7 +114,7 @@ h1{
     position:fixed;
     bottom:20px;
     right:20px;
-    background:#25D366;
+    background:#1f2f3a;
     color:white;
     padding:15px;
     border-radius:50%;
@@ -107,37 +128,37 @@ h1{
 <!-- PORTADA -->
 <div class="hero fade">
     <h1>Allyson Ortega</h1>
-    <p>Estás invitado a esta fiesta</p>
+    <p class="subtitle">Estás invitado a esta celebración</p>
 </div>
 
 <!-- FECHA -->
-<div class="section fade">
-    <div class="card">
-        <h2>20 de Junio</h2>
-        <p>A partir de las 12:00</p>
-    </div>
+<div class="card fade">
+    <h2>20 de junio</h2>
+    <p>A partir de las 12:00</p>
 </div>
 
 <!-- CONTADOR -->
-<div class="section fade">
+<div class="card fade">
     <h2>Faltan</h2>
     <div id="countdown"></div>
 </div>
 
 <!-- UBICACIÓN -->
-<div class="section fade">
+<div class="card fade">
     <h2>Ubicación</h2>
-    <a href="https://share.google/lII68GgMTj6nxDVPl" class="btn">Ver mapa</a>
+    <a href="https://share.google/lII68GgMTj6nxDVPl">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Ecatepec,Mexico&zoom=15&size=600x300&markers=color:red|Ecatepec,Mexico" class="map">
+    </a>
 </div>
 
-<!-- DRESS CODE -->
-<div class="section fade">
+<!-- DRESS -->
+<div class="card fade">
     <div class="dress">Dress Code</div>
     <p>Ropa casual y traje de baño</p>
 </div>
 
 <!-- RSVP -->
-<div class="section fade">
+<div class="card fade">
     <h2>Confirma tu asistencia</h2>
     <div class="rsvp">
         <button onclick="window.open('https://wa.me/525661052234')">Sí asistiré</button>
@@ -146,19 +167,18 @@ h1{
 </div>
 
 <!-- FINAL -->
-<div class="section fade">
+<div class="fade">
     <h1>Te esperamos</h1>
 </div>
 
 <a class="whatsapp" href="https://wa.me/525661052234">💬</a>
 
 <script>
-// animaciones al hacer scroll
+// animaciones
 const faders = document.querySelectorAll('.fade');
 window.addEventListener('scroll', ()=>{
     faders.forEach(el=>{
-        const top = el.getBoundingClientRect().top;
-        if(top < window.innerHeight - 100){
+        if(el.getBoundingClientRect().top < window.innerHeight - 100){
             el.classList.add('show');
         }
     });
@@ -177,7 +197,7 @@ setInterval(()=>{
     const s = Math.floor((gap % (1000*60)) / 1000);
 
     document.getElementById("countdown").innerHTML =
-    `${d}d ${h}h ${m}m ${s}s`;
+    `${d}d : ${h}h : ${m}m : ${s}s`;
 
 },1000);
 </script>
